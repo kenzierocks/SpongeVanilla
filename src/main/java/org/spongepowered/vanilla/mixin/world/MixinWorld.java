@@ -36,10 +36,9 @@ import org.spongepowered.asm.mixin.injection.Surrogate;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import org.spongepowered.common.Sponge;
-import org.spongepowered.common.interfaces.IMixinWorld;
 
 @Mixin(World.class)
-public abstract class MixinWorld implements org.spongepowered.api.world.World, IMixinWorld {
+public abstract class MixinWorld {
 
     @Inject(method = "spawnEntityInWorld", locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getChunkFromChunkCoords(II)Lnet/minecraft/world/chunk/Chunk;"))

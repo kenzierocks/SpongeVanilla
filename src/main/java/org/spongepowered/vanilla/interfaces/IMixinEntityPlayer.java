@@ -22,4 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-@org.spongepowered.api.util.annotation.NonnullByDefault package org.spongepowered.vanilla.registry;
+package org.spongepowered.vanilla.interfaces;
+
+import net.minecraft.util.BlockPos;
+
+import java.util.HashMap;
+
+public interface IMixinEntityPlayer extends org.spongepowered.common.interfaces.IMixinEntityPlayer {
+    HashMap<Integer, BlockPos> getSpawnChunkMap();
+
+    HashMap<Integer, Boolean> getSpawnForcedMap();
+}

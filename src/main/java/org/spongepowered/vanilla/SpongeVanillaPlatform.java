@@ -29,16 +29,18 @@ import org.spongepowered.common.AbstractPlatform;
 
 public class SpongeVanillaPlatform extends AbstractPlatform {
 
-    private final Type type;
-
     public SpongeVanillaPlatform(MinecraftVersion minecraftVersion, String apiVersion, String version) {
         super(minecraftVersion, apiVersion, version);
-        this.type = Type.SERVER;
     }
 
     @Override
     public Type getType() {
-        return this.type;
+        return Type.SERVER;
+    }
+
+    @Override
+    public Type getExecutionType() {
+        return Type.SERVER;
     }
 
 }

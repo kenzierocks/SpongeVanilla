@@ -40,12 +40,12 @@ import org.spongepowered.api.world.TeleportHelper;
 import org.spongepowered.common.Sponge;
 import org.spongepowered.common.event.SpongeEventManager;
 import org.spongepowered.common.guice.ConfigDirAnnotation;
+import org.spongepowered.common.registry.SpongeGameRegistry;
 import org.spongepowered.common.world.SpongeTeleportHelper;
 import org.spongepowered.vanilla.SpongeVanilla;
 import org.spongepowered.vanilla.VanillaGame;
 import org.spongepowered.vanilla.plugin.MinecraftPluginContainer;
 import org.spongepowered.vanilla.plugin.VanillaPluginManager;
-import org.spongepowered.vanilla.registry.VanillaGameRegistry;
 
 import java.io.File;
 
@@ -64,13 +64,13 @@ public class VanillaGuiceModule extends AbstractModule {
         bind(SpongeVanilla.class).toInstance(this.instance);
         bind(Logger.class).toInstance(this.logger);
 
-        bind(PluginContainer.class).annotatedWith(named("Sponge")).toInstance(this.instance);
+        bind(PluginContainer.class).annotatedWith(named(Sponge.ECOSYSTEM_NAME)).toInstance(this.instance);
         bind(PluginContainer.class).annotatedWith(named("Minecraft")).to(MinecraftPluginContainer.class).in(Scopes.SINGLETON);
 
         bind(Game.class).to(VanillaGame.class).in(Scopes.SINGLETON);
         bind(PluginManager.class).to(VanillaPluginManager.class).in(Scopes.SINGLETON);
         bind(EventManager.class).to(SpongeEventManager.class).in(Scopes.SINGLETON);
-        bind(GameRegistry.class).to(VanillaGameRegistry.class).in(Scopes.SINGLETON);
+        bind(GameRegistry.class).to(SpongeGameRegistry.class).in(Scopes.SINGLETON);
         bind(ServiceManager.class).to(SimpleServiceManager.class).in(Scopes.SINGLETON);
         bind(TeleportHelper.class).to(SpongeTeleportHelper.class).in(Scopes.SINGLETON);
 

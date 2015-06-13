@@ -24,20 +24,13 @@
  */
 package org.spongepowered.vanilla.mixin.server;
 
-import com.google.common.collect.Lists;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.IChatComponent;
-import net.minecraft.world.WorldServer;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.api.Server;
-import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.event.state.ServerStartedEvent;
 import org.spongepowered.api.event.state.ServerStoppedEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
-import org.spongepowered.api.util.command.CommandSource;
-import org.spongepowered.api.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -47,17 +40,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.common.text.SpongeTexts;
 import org.spongepowered.vanilla.SpongeVanilla;
 
-import java.util.Collection;
-import java.util.Collections;
-
 @Mixin(MinecraftServer.class)
-public abstract class MixinMinecraftServer implements Server, CommandSource, ICommandSender {
+public abstract class MixinMinecraftServer {
 
-    @Shadow
-    private static Logger logger;
-
-    @Shadow
-    private ServerConfigurationManager serverConfigManager;
+    @Shadow private static Logger logger;
+    @Shadow private ServerConfigurationManager serverConfigManager;
 
     @Inject(method = "run", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;addFaviconToStatusResponse"
             + "(Lnet/minecraft/network/ServerStatusResponse;)V", shift = At.Shift.AFTER))
@@ -81,14 +68,8 @@ public abstract class MixinMinecraftServer implements Server, CommandSource, ICo
         return SpongeVanilla.INSTANCE.getName();
     }
 
-    @Override
     @Overwrite
     public void addChatMessage(IChatComponent component) {
         logger.info(SpongeTexts.toLegacy(component));
-    }
-
-    @Override
-    public Collection<Player> getOnlinePlayers() {
-        return (Collection<Player>) Collections.unmodifiableCollection(serverConfigManager.playerEntityList);
     }
 }

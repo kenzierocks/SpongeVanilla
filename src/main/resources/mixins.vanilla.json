@@ -12,7 +12,6 @@
         "item.MixinEnchantment",
         "network.MixinNetHandlerPlayServer",
         "server.management.MixinItemInWorldManager",
-        "server.management.MixinServerConfigurationManager",
         "server.MixinConsoleHandler",
         "server.MixinDedicatedServer",
         "server.MixinMinecraftServer",

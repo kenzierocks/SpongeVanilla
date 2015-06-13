@@ -17,6 +17,8 @@
         "server.MixinMinecraftServer",
         "tileentity.MixinTileEntity",
         "world.MixinChunk",
-        "world.MixinWorld"
+        "world.MixinWorld",
+        "world.MixinWorldProvider",
+        "world.MixinWorldType"
     ]
 }
